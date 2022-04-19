@@ -17,13 +17,15 @@ fetch('https://unsplash.it/600/400')
 const postSection = document.querySelector('#posts');
 const postTemplate = document.querySelector('#post-template');
 
-getData();
+getData()
+    .catch(err => console.error(err));
 
 async function getData() {
-    const postStream = await fetch('https://jsonplaceholder.tyicode.com/posts');
+    const postStream = await fetch('https://jsonplaceholder.typicode.com/posts');
     const posts = await postStream.json();
     let i = 0;
 
+    // throw 'Get Data Error';
     // console.log(posts);
 
     posts.forEach(post => {
@@ -42,11 +44,12 @@ async function getData() {
         
                     // throw 'Image Fetch Error';
 
-                    postImg.src = URL.createObjectURL(blog);
+                    postImg.src = URL.createObjectURL(blob);
                     postTitle.innerText = title;
                     postBody.innerText = body;
                     postSection.appendChild(newPost);
                 })
+                // .catch(err => console.error(err));
         }
     })
 }
